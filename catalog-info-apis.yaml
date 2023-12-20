@@ -6,7 +6,7 @@ metadata:
   annotations:
     visibility: public
 spec:
-  openapiDefinition: # Add your OpenAPI definition here
+  openapiDefinition:
     info:
       title: rlabdev Service API
       version: 1.0.0
