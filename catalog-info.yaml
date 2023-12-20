@@ -111,14 +111,3 @@ spec:
     - type: uses-api
       target: api:default/rlabdev-service-api
     
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: rlabdev-service-api
-  annotations:
-    openapi-ref: https://path/to/openapi.yaml
-spec:
-  type: openapi
-  lifecycle: production
-  owner: rca0
