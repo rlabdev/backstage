@@ -1,43 +1,4 @@
 apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: rca0
-spec:
-  type: team
-  parent: default
-
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: rlabdev-service-api
-  description: API for rlabdev service
-spec:
-  type: openapi
-  lifecycle: production
-  owner: rca0
-  definition: https://rlabdev.com/docs/openapi.yaml
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Catalog
-metadata:
-  name: default
-spec:
-  owner: backstage
-  description: Default catalog for Backstage
-  entries:
-    - metadata:
-        type: group
-        name: rca0
-        description: Team RCA0
-    - metadata:
-        type: api
-        name: rlabdev-service-api
-        description: API for rlabdev service
-
----
-apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: rlabdev-service-api
