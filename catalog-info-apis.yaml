@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Api
+metadata:
+  name: rlabdev-service-api
+  description: API for the rlabdev service
+  annotations:
+    visibility: public
+spec:
+  openapiDefinition: # Add your OpenAPI definition here
+    info:
+      title: rlabdev Service API
+      version: 1.0.0
+    paths:
+      /example:
+        get:
+          summary: Get example data
+          responses:
+            '200':
+              description: OK
