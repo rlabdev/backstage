@@ -1,4 +1,12 @@
 apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: rlabdev-service
+spec:
+  owner: rca0
+
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: rlabdev-service-api
@@ -47,3 +55,4 @@ spec:
   type: aws:sqs
   lifecycle: development
   owner: infrastructure-team
+  
