@@ -1,10 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: rlabdev
+  name: rlabdev-service-api
   description: The Service Description
   annotations:
     tags: "backend, service"
+    backstage.io/techdocs-ref: https://rlabdev.com/docs/rlabdev-service-api    
 spec:
   type: service
   lifecycle: experimental
