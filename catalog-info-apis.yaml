@@ -1,3 +1,4 @@
+# catalog-info-apis.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Api
 metadata:
@@ -6,7 +7,8 @@ metadata:
   annotations:
     visibility: public
 spec:
-  openapiDefinition: # Add your OpenAPI definition here
+  openapiDefinition:
+    openapi: 3.0.0
     info:
       title: rlabdev Service API
       version: 1.0.0
