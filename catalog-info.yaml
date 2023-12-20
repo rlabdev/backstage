@@ -1,23 +1,93 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: backstage-rlabdev
-  description: |
-    Backstage is an open-source developer portal that puts the developer experience first.
-  links:
-    - title: Website
-      url: http://backstage.io
-    - title: Documentation
-      url: https://backstage.io/docs
-    - title: Storybook
-      url: https://backstage.io/storybook
-    - title: Discord Chat
-      url: https://discord.com/invite/EBHEGzX
+  name: rlabdev
+  description: The Service Description
   annotations:
-    github.com/project-slug: rlabdev/backstage
-    backstage.io/techdocs-ref: dir:.
-    lighthouse.com/website-url: https://ruanc.dev
+    tags: [backend, service]
 spec:
-  type: library
-  owner: rca0
+  type: service
   lifecycle: experimental
+  owner: rca0
+  providesApis:
+    - api: rlabdev-api
+      visibility: public
+  relations:
+    - type: uses-service
+      target: rlabdev-worker
+    - type: uses-resource
+      target: rds-postgresql
+    - type: uses-resource
+      target: aws-sqs-queue
+    - type: uses-resource
+      target: kafka
+    - type: uses-resource
+      target: redis-cache
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: rds-postgresql
+  description: RDS PostgreSQL Database
+  annotations:
+    type: database
+    provider: aws
+spec:
+  type: aws:rds:postgresql
+  lifecycle: development
+  owner: infrastructure-team
+  relations:
+    - type: uses-api
+      target: rlabdev-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: aws-sqs-queue
+  description: AWS SQS Queue
+  annotations:
+    type: messaging
+    provider: aws
+    topicOrQueueName: sqs-queue-name-1
+spec:
+  type: aws:sqs
+  lifecycle: development
+  owner: infrastructure-team
+  relations:
+    - type: uses-api
+      target: rlabdev-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: kafka
+  description: Kafka
+  annotations:
+    type: messaging
+    topicOrQueueName: kafka-topic-name-1
+spec:
+  type: messaging:kafka
+  lifecycle: development
+  owner: infrastructure-team
+  relations:
+    - type: uses-api
+      target: rlabdev-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: redis-cache
+  description: Redis Cache
+  annotations:
+    type: cache
+spec:
+  type: caching:redis
+  lifecycle: development
+  owner: infrastructure-team
+  relations:
+    - type: uses-api
+      target: rlabdev-api
