@@ -1,5 +1,9 @@
-# Testing TechDocs
+<!-- docs/index.md -->
+# Component Documentation
 
-# A
-# B
-# C
+This is the main documentation for the component.
+
+<!-- docs/guide.md -->
+# Usage Guide
+
+Here's how you can use this component in your projects.
