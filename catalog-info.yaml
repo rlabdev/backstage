@@ -15,20 +15,10 @@ spec:
     - "rlabdev-service-api"
   visibility: public
   relations:
-    - type: uses-service
-      target: rlabdev-worker
     - type: uses-resource
       target: rds-postgresql
     - type: uses-resource
       target: aws-sqs-queue
-    - type: uses-resource
-      target: kafka
-    - type: uses-resource
-      target: redis-cache
-    - type: belongs-to
-      target: group:default/rca0
-    - type: uses-api
-      target: rlabdev-service-api
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -43,9 +33,6 @@ spec:
   type: aws:rds:postgresql
   lifecycle: development
   owner: infrastructure-team
-  relations:
-    - type: uses-api
-      target: rlabdev-service-api
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -56,44 +43,7 @@ metadata:
   annotations:
     type: messaging
     provider: aws
-    topicOrQueueName: sqs-queue-name-1
 spec:
   type: aws:sqs
   lifecycle: development
   owner: infrastructure-team
-  relations:
-    - type: uses-api
-      target: rlabdev-service-api
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Resource
-metadata:
-  name: kafka
-  description: Kafka
-  annotations:
-    type: messaging
-    topicOrQueueName: kafka-topic-name-1
-spec:
-  type: messaging:kafka
-  lifecycle: development
-  owner: infrastructure-team
-  relations:
-    - type: uses-api
-      target: rlabdev-service-api
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Resource
-metadata:
-  name: redis-cache
-  description: Redis Cache
-  annotations:
-    type: cache
-spec:
-  type: caching:redis
-  lifecycle: development
-  owner: infrastructure-team
-  relations:
-    - type: uses-api
-      target: rlabdev-service-api
