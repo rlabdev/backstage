@@ -13,8 +13,6 @@ spec:
     - "rlabdev-service-api"
   visibility: public  
   relations:
-    - type: uses-service
-      target: rlabdev-worker
     - type: uses-resource
       target: rds-postgresql
     - type: uses-resource
@@ -23,11 +21,6 @@ spec:
       target: kafka
     - type: uses-resource
       target: redis-cache
-    - type: belongs-to
-      target: group:default/rca0
-    - type: uses-api
-      target: api:default/rlabdev-service-api
-
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
