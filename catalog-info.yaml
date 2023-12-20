@@ -2,19 +2,19 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: rlabdev-service-api
-  description: The Service Description
+  description: The Service API Description
   annotations:
     tags: "backend, service"
-    backstage.io/techdocs-ref: https://rlabdev.com/docs/rlabdev-service-api    
+    backstage.io/techdocs-ref: https://rlabdev.com/docs/rlabdev-service-api
 spec:
   type: service
   lifecycle: experimental
   owner: rca0
   docs:
-    overview: docs/index.md  
+    overview: docs/index.md
   providesApis:
     - "rlabdev-service-api"
-  visibility: public  
+  visibility: public
   relations:
     - type: uses-service
       target: rlabdev-worker
@@ -30,6 +30,18 @@ spec:
       target: group:default/rca0
     - type: uses-api
       target: api:default/rlabdev-service-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: rca0
+  annotations:
+    description: "The RCA0 Group"
+spec:
+  children:
+    - kind: component
+      name: rlabdev-service-api
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -98,3 +110,15 @@ spec:
   relations:
     - type: uses-api
       target: api:default/rlabdev-service-api
+    
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: rlabdev-service-api
+  annotations:
+    openapi-ref: https://path/to/openapi.yaml
+spec:
+  type: openapi
+  lifecycle: production
+  owner: rca0
