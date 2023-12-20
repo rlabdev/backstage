@@ -5,7 +5,6 @@ metadata:
   description: The Service API Description
   annotations:
     tags: "backend, service"
-    backstage.io/techdocs-ref: https://rlabdev.com/docs/rlabdev-service-api
 spec:
   type: service
   lifecycle: experimental
