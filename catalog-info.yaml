@@ -9,6 +9,8 @@ spec:
   type: service
   lifecycle: experimental
   owner: rca0
+  docs:
+    overview: docs/index.md  
   providesApis:
     - "rlabdev-service-api"
   visibility: public  
