@@ -9,7 +9,8 @@ spec:
   type: service
   lifecycle: experimental
   owner: rca0
-  providesApis:
+  providesApis: "rlabdev-service-api"
+  relations:
     - api: rlabdev-api
       visibility: public
   relations:
