@@ -10,9 +10,7 @@ spec:
   lifecycle: experimental
   owner: rca0
   providesApis: "rlabdev-service-api"
-  relations:
-    - api: rlabdev-api
-      visibility: public
+  visibility: public  
   relations:
     - type: uses-service
       target: rlabdev-worker
