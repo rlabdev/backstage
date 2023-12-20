@@ -1,21 +1,19 @@
-# catalog-info-apis.yaml
 apiVersion: backstage.io/v1alpha1
-kind: Api
+kind: API
 metadata:
   name: rlabdev-service-api
-  description: API for the rlabdev service
-  annotations:
-    visibility: public
 spec:
-  openapiDefinition:
-    openapi: 3.0.0
-    info:
-      title: rlabdev Service API
-      version: 1.0.0
-    paths:
-      /example:
-        get:
-          summary: Get example data
-          responses:
-            '200':
-              description: OK
+  type: grpc
+  lifecycle: experimental
+  owner: rca0
+  system: rlabdev-service-api
+  definition: |
+    syntax = "proto3";
+
+    service Exampler {
+      rpc Example (ExampleMessage) returns (ExampleMessage) {};
+    }
+
+    message ExampleMessage {
+      string example = 1;
+    };
