@@ -11,7 +11,11 @@ spec:
   owner: rca0
   providesApis:
     - "rlabdev-service-api"
-  visibility: public  
+  visibility: public
+  links:
+    - url: https://dashboard.example.com
+      title: My Dashboard
+      icon: dashboard
   relations:
     - type: uses-service
       target: rlabdev-worker
