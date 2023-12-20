@@ -4,7 +4,7 @@ metadata:
   name: rlabdev
   description: The Service Description
   annotations:
-    tags: [backend, service]
+    tags: "backend, service"
 spec:
   type: service
   lifecycle: experimental
