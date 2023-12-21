@@ -1,0 +1,97 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: aws-lambda
+  title: Create AWS lambda
+  description: Criação de AWS lambda
+  tags: [brunosantosnet, medium, post]
+spec:
+  owner: brunosantosnet
+  type: service
+  parameters:
+    - title: 'Dados'
+      required: [name, description, memory, timeout]
+      properties:
+        name:
+          title: 'Nome'
+          type: string
+          description: 'Nome da `lambda`'
+          default: 'post-backstage-template'
+          maxLength: 50
+          pattern: '^[a-zA-Z0-9\-]*$'
+          ui:autofocus: true
+          ui:help: 'Máximo de 50 caracteres. Permite letras, números e traço'
+        description:
+          title: 'Descrição'
+          type: string
+          description: 'Descrição da lambda'
+          maxLength: 100
+          default: 'post-backstage-template'
+          ui:autofocus: true
+          ui:help: 'Resumidamente informe o objetivo da sua `lambda`'
+        memory:
+          title: 'Memória'
+          type: integer
+          description: 'Limite de memória (MB) da função `lambda`'
+          enum:
+          - 128
+          - 256
+          - 512
+          default: 128
+          ui:autofocus: true
+          ui:help: 'Quanto mais memória, maior o custo da `lambda`'
+        timeout:
+          title: 'Timeout'
+          type: string
+          description: 'Tempo limite em segundos de execução da `lambda`'
+          default: '10'
+          pattern: '^([1-9]|[1-9][0-9]|[1-8][0-9][0-9]|900)$'
+          ui:autofocus: true
+          ui:help: 'Até o limite de 900 segundos'
+        vpc:
+          title: 'Virtual Private Cloud'
+          type: boolean
+          description: 'Marque se a `lambda` precisará acessar recursos que estão na VPC'
+          ui:help: 'Marque se a `lambda` precisará acessar recursos que estão na VPC (ex: RDS, Redis)'
+    - title: 'Repositório da Infraestrutura'
+      required: [repoUrl]
+      properties:
+        repoUrl:
+          title: Repository
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+            allowedOwners:
+              - brunosantosnet
+  steps:
+    - id: fetch-base
+      name: Aplicando template (Lambda)
+      action: fetch:template
+      input:
+        targetPath: aws-lambda/${{ parameters.name }}/
+        url: ./templates/lambda
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          memory: ${{ parameters.memory }}
+          timeout: ${{ parameters.timeout }}
+          vpc: ${{ parameters.vpc }}
+    - id: publish_lambda
+      name: Criando PR para Lambda
+      action: publish:github:pull-request
+      input:
+        allowedHosts: ['github.com']
+        repoUrl: ${{ parameters.repoUrl }}
+        sourcePath: aws-lambda/
+        targetPath: ./
+        description: Codigo da lambda ${{ parameters.name }}.
+        title: "feat: ${{ parameters.name }}"
+        branchName: "feat-${{ parameters.name }}"
+
+  output:
+    links:
+      - title: Repositório Lambda
+        url: ${{steps.publish_lambda.output.remoteUrl}}
+        text: "PR da Lambda"
