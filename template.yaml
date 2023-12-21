@@ -4,9 +4,9 @@ metadata:
   name: aws-lambda
   title: Create AWS lambda
   description: Criação de AWS lambda
-  tags: [brunosantosnet, medium, post]
+  tags: [rca0, medium, post]
 spec:
-  owner: brunosantosnet
+  owner: rca0
   type: service
   parameters:
     - title: 'Dados'
@@ -64,7 +64,7 @@ spec:
             allowedHosts:
               - github.com
             allowedOwners:
-              - brunosantosnet
+              - rca0
   steps:
     - id: fetch-base
       name: Aplicando template (Lambda)
